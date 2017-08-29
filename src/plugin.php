@@ -21,14 +21,13 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
  */
 function enqueue_assets() {
 
-	$module_dir = ACCOMMODATION_DIR;
 	$asset_file = 'assets/css/style.css';
 
 	wp_enqueue_style(
 		'accommodation_style',
-		$module_dir . $asset_file,
+		ACCOMMODATION_URL . $asset_file,
 		array(),
-		get_asset_current_version_number( $module_dir . $asset_file )
+		get_asset_current_version_number( ACCOMMODATION_DIR . $asset_file )
 	);
 
 	wp_enqueue_style( 'dashicons' );
