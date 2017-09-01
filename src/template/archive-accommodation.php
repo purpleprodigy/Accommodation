@@ -38,7 +38,7 @@ function do_accommodation_archive_loop() {
 	foreach ( $records as $record ) {
 		$term_slug = $record['term_slug'];
 
-		include( ACCOMMODATION_DIR . 'src/views/container.php' );
+		include ACCOMMODATION_DIR . 'src/views/container.php';
 	}
 }
 
@@ -62,7 +62,7 @@ function loop_and_render_accommodations( array $accommodations ) {
 		$post_thumbnail_metadata = $accommodation['thumbnail_metadata'];
 		$post_thumbnail_title    = $accommodation['post_title'];
 
-		include( ACCOMMODATION_DIR . 'src/views/accommodation.php' );
+		include ACCOMMODATION_DIR . 'src/views/accommodation.php';
 	}
 }
 

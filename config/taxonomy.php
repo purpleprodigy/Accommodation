@@ -15,26 +15,26 @@ return array(
 	/**=============================================================
 	 * The taxonomy name.
 	 *============================================================*/
-	'taxonomy' => 'accommodation-type',
+	'taxonomy'   => 'accommodation-type',
 
 	/**=============================================================
 	 * The label configuration.
 	 *============================================================*/
-	'labels' => array(
-		'custom_type' => 'accommodation-type',
-		'singular_label' => 'Accommodation type',
-		'plural_label' => 'Accommodation types',
+	'labels'     => array(
+		'custom_type'       => 'accommodation-type',
+		'singular_label'    => 'Accommodation type',
+		'plural_label'      => 'Accommodation types',
 		'in_sentence_label' => 'accommodation type',
-		'text_domain' => ACCOMMODATION_TEXT_DOMAIN,
-		'specific_labels' => array(),
+		'text_domain'       => ACCOMMODATION_TEXT_DOMAIN,
+		'specific_labels'   => array(),
 	),
 
 	/**=============================================================
 	 * These are the arguments for registering the taxonomy.
 	 *============================================================*/
-	'args'     => array(
+	'args'       => array(
 		'label'             => __( 'Accommodation type', ACCOMMODATION_TEXT_DOMAIN ),
-		'labels'        => '', // automatically generate the labels.
+		'labels'            => '', // automatically generate the labels.
 		'hierarchical'      => true,
 		'show_admin_column' => true,
 		'public'            => false,
@@ -44,5 +44,5 @@ return array(
 	/**=============================================================
 	 * These are the post types to bind the taxonomy to.
 	 *============================================================*/
-	'post_types' => array ( 'accommodation' ),
+	'post_types' => array( 'accommodation' ),
 );

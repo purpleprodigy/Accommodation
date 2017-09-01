@@ -8,6 +8,7 @@
  * @link        https:/purpleprodigy.com
  * @licence     GNU General Public License 2.0+
  */
+
 namespace PurpleProdigy\Accommodation;
 
 return array(
@@ -19,20 +20,20 @@ return array(
 	/**============================================
 	 * Label configuration
 	 *============================================*/
-	'labels' => array(
-		'custom_type' => 'accommodation',
-		'singular_label' => 'Accommodation',
-		'plural_label' => 'Accommodation',
+	'labels'    => array(
+		'custom_type'       => 'accommodation',
+		'singular_label'    => 'Accommodation',
+		'plural_label'      => 'Accommodation',
 		'in_sentence_label' => 'accommodation',
-		'text_domain' => ACCOMMODATION_TEXT_DOMAIN,
+		'text_domain'       => ACCOMMODATION_TEXT_DOMAIN,
 	),
 
 	/**============================================
 	 * Supported features for this post type
 	 *============================================*/
-	'features' => array(
+	'features'  => array(
 		'base_post_type' => 'page',
-		'exclude' => array(
+		'exclude'        => array(
 			'excerpt',
 			'comments',
 			'trackbacks',
@@ -41,13 +42,13 @@ return array(
 			'genesis-seo',
 			'genesis-layouts',
 			'genesis-scripts'
-			),
+		),
 	),
 
 	/**============================================
 	 * Arguments for registering the post type
 	 *============================================*/
-	'args' => array(
+	'args'      => array(
 		'description'   => 'Accommodation Display',
 		'label'         => __( 'Accommodation', ACCOMMODATION_TEXT_DOMAIN ),
 		'labels'        => '', // automatically generate the labels.

@@ -35,9 +35,8 @@ function load_the_accommodation_archive_template( $theme_archive_template ) {
 		return $plugin_archive_template;
 
 	}
+
 	return $theme_archive_template;
-
-
 }
 
 /**
