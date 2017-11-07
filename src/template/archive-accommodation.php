@@ -55,6 +55,7 @@ function loop_and_render_accommodations( array $accommodations ) {
 
 	foreach ( $accommodations as $accommodation ) {
 
+		$post_id                 = $accommodation['post_id'];
 		$post_title              = $accommodation['post_title'];
 		$post_content            = $accommodation['post_content'];
 		$post_thumbnail_id       = $accommodation['thumbnail_id'];

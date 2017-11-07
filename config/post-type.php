@@ -37,7 +37,6 @@ return array(
 			'excerpt',
 			'comments',
 			'trackbacks',
-			'custom-fields',
 			'author',
 			'genesis-seo',
 			'genesis-layouts',

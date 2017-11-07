@@ -96,7 +96,6 @@ function get_posts_grouped_by_term( $post_type_name, $taxonomy_name ) {
  *
  * @return array|false
  */
-
 function get_posts_grouped_by_term_from_db( $post_type_name, $taxonomy_name ) {
 	global $wpdb;
 
