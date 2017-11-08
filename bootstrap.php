@@ -36,19 +36,30 @@
 namespace PurpleProdigy\Accommodation;
 
 use PurpleProdigy\Polestar\Custom as CustomModule;
+use PurpleProdigy\Metadata as metaData;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( "Nothing to see here." );
 }
 
-define( 'ACCOMMODATION_PLUGIN', __FILE__ );
-define( 'ACCOMMODATION_DIR', trailingslashit( __DIR__ ) );
-$plugin_url = plugin_dir_url( __FILE__ );
-if ( is_ssl() ) {
-	$plugin_url = str_replace( 'http://', 'https://', $plugin_url );
+/**
+ * Set up the plugin's constants.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function init_constants() {
+	$plugin_url = plugin_dir_url( __FILE__ );
+	if ( is_ssl() ) {
+		$plugin_url = str_replace( 'http://', 'https://', $plugin_url );
+	}
+
+	define( 'ACCOMMODATION_URL', $plugin_url );
+	define( 'ACCOMMODATION_DIR', plugin_dir_path( __FILE__ ) );
+	define( 'ACCOMMODATION_PLUGIN', __FILE__ );
+	define( 'ACCOMMODATION_TEXT_DOMAIN', 'accommodation' );
 }
-define( 'ACCOMMODATION_URL', $plugin_url );
-define( 'ACCOMMODATION_TEXT_DOMAIN', 'accommodation' );
 
 include __DIR__ . '/src/plugin.php';
 
@@ -79,3 +90,43 @@ function delete_rewrite_rules_on_plugin_status_change() {
 }
 
 CustomModule\register_plugin( __FILE__ );
+
+/**
+ * Autoload the plugin's files.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function autoload_files() {
+	$files = array(
+		'/src/config-store/module.php',
+		'/src/metadata/module.php'
+	);
+
+	foreach ( $files as $filename ) {
+		require __DIR__ . $filename;
+	}
+}
+
+/**
+ * Launch the plugin
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function launch() {
+	init_constants();
+
+	autoload_files();
+
+	// Load configurations
+	metaData\autoload_configurations(
+		array(
+			__DIR__ . '/config/meta-box.php'
+		)
+	);
+}
+
+launch();

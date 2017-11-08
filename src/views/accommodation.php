@@ -8,13 +8,12 @@
         <p itemprop="description">
 			<?php esc_html_e( $post_content ); ?>
             <br>
-			<?php esc_html_e( get_post_meta( $post_id, 'Button', true ) ); ?>
-            <!--            <a class="button" href="https://bookings2.rms.com.au/obookings3/Search/Index/9295/1/?Rd=1">BOOK NOW</a>-->
+		    <a class="button" href="<?php esc_url( get_post_meta( $post_id, 'button', true ) ); ?>">BOOK NOW</a>
         </p>
     </div>
     <ul class="summary" itemprop="amenityFeature">
-        <li><i class="fa fa-male"></i><?php esc_html_e( get_post_meta( $post_id, 'Sleeps', true ) ); ?></li>
-        <li><i class="fa fa-bed"></i><?php esc_html_e( get_post_meta( $post_id, 'Beds', true ) ); ?></li>
-        <li><i class="fa fa-usd"></i><?php esc_html_e( get_post_meta( $post_id, 'Price', true ) ); ?></li>
+        <li><i class="fa fa-male"></i><?php esc_html_e( get_post_meta( $post_id, 'sleeps', true ) ); ?></li>
+        <li><i class="fa fa-bed"></i><?php esc_html_e( get_post_meta( $post_id, 'beds', true ) ); ?></li>
+        <li><i class="fa fa-usd"></i><?php esc_html_e( get_post_meta( $post_id, 'price', true ) ); ?></li>
     </ul>
 </div>
