@@ -6,7 +6,7 @@
  * @since       1.0.0
  * @author      Purple Prodigy
  * @link        https://purpleprodigy.com
- * @licence     GNU General Public License 2.0+
+ * @licence     GNU-2.0+
  */
 
 namespace PurpleProdigy\Accommodation;
@@ -22,9 +22,10 @@ return array(
 	 *============================================================*/
 	'labels'     => array(
 		'custom_type'       => 'accommodation-type',
-		'singular_label'    => 'Accommodation type',
-		'plural_label'      => 'Accommodation types',
-		'in_sentence_label' => 'accommodation type',
+		'singular_label'    => 'Accommodation Type',
+		'plural_label'      => 'Accommodation Types',
+		'menu_name'         => 'Types',
+		'in_sentence_label' => 'accommodation Type',
 		'text_domain'       => ACCOMMODATION_TEXT_DOMAIN,
 		'specific_labels'   => array(),
 	),

@@ -16,7 +16,7 @@
     <span class="description"><?php _e( 'Enter the how many it sleeps.', 'metabox' ); ?></span>
 </p>
 <p>
-    <label for="button"><?php _e( 'URL', 'metabox' ); ?></label>
-    <input class="large-text" type="url" name="<?php echo $meta_box_id; ?>[button]" value="<?php esc_url_raw( $custom_fields['button'] ); ?>">
+    <label for="booking_system_url"><?php _e( 'URL', 'metabox' ); ?></label>
+    <input class="large-text" type="url" name="<?php echo $meta_box_id; ?>[booking_system_url]" value="<?php echo $custom_fields['booking_system_url'] ? esc_url( $custom_fields['booking_system_url'] ) : ''; ?>">
     <span class="description"><?php _e( 'Enter the url of the booking system.', 'metabox' ); ?></span>
 </p>

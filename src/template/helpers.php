@@ -6,7 +6,7 @@
  * @since       1.0.0
  * @author      Purple Prodigy
  * @link        https://purpleprodigy.com
- * @licence     GNU General Public License 2.0+
+ * @licence     GNU-2.0+
  */
 
 namespace PurpleProdigy\Accommodation\Template;
@@ -17,7 +17,7 @@ add_filter( 'archive_template', __NAMESPACE__ . '\load_the_accommodation_archive
  *
  * @since 1.0.0
  *
- * @param string $theme_archive_template Full qualified path to the archive template
+ * @param string $theme_archive_template Fully qualified path to the archive template.
  *
  * @return string
  */
@@ -31,9 +31,9 @@ function load_the_accommodation_archive_template( $theme_archive_template ) {
 	if ( ! $theme_archive_template ) {
 		return $plugin_archive_template;
 	}
+
 	if ( strpos( $theme_archive_template, '/archive-accommodation.php' ) === false ) {
 		return $plugin_archive_template;
-
 	}
 
 	return $theme_archive_template;
@@ -123,8 +123,8 @@ function get_posts_grouped_by_term_from_db( $post_type_name, $taxonomy_name ) {
 		ORDER BY t.term_id, p.menu_order ASC";
 
 	$sql_query = $wpdb->prepare( $sql_query, $post_type_name, $taxonomy_name );
-
 	$results = $wpdb->get_results( $sql_query );
+
 	if ( ! $results || ! is_array( $results ) ) {
 		return array();
 	}

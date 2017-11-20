@@ -8,7 +8,7 @@
  * @since       1.0.0
  * @author      Purple Prodigy
  * @link        https://purpleprodigy.com
- * @licence     GNU General Public License 2.0+
+ * @licence     GNU-2.0+
  */
 
 namespace PurpleProdigy\Metadata;
@@ -26,9 +26,8 @@ return array(
 		 * Configuration parameters for adding the meta box.
 		 ***********************************************************/
 		'add_meta_box'  => array(
-			'title'    => __( 'Accommodation', 'accommodation' ),
-			'screen'   => array( 'accommodation' ),
-//			'context'  => 'side',
+			'title'  => __( 'Accommodation', 'accommodation' ),
+			'screen' => array( 'accommodation' ),
 		),
 
 		/************************************************************
@@ -36,29 +35,29 @@ return array(
 		 * value, delete_state, and sanitizing function.
 		 ***********************************************************/
 		'custom_fields' => array(
-			'beds'   => array(
+			'beds'               => array(
 				'is_single'    => true,
 				'default'      => '',
 				'delete_state' => '',
 				'sanitize'     => 'sanitize_text_field',
 			),
-			'price'  => array(
+			'price'              => array(
 				'is_single'    => true,
 				'default'      => '',
 				'delete_state' => '',
 				'sanitize'     => 'sanitize_text_field',
 			),
-			'sleeps' => array(
+			'sleeps'             => array(
 				'is_single'    => true,
 				'default'      => '',
 				'delete_state' => '',
 				'sanitize'     => 'sanitize_text_field',
 			),
-			'button' => array(
+			'booking_system_url' => array(
 				'is_single'    => true,
 				'default'      => '',
 				'delete_state' => '',
-				//'sanitize'     => '',
+				'sanitize'     => 'sanitize_text_field',
 			),
 		),
 

@@ -1,6 +1,6 @@
 <?php
 
-use PurpleProdigy\Accommodation\Template as Template;
+use PurpleProdigy\Accommodation\Template;
 
 if ( isset ( $use_term_container ) && $use_term_container ) : ?>
 <div class="accommodation-container">

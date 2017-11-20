@@ -1,15 +1,30 @@
 <?php
 /**
- * Accommodation Handler
+ * Registration and Handlers for the Accommodation's custom post type and taxonomy.
  *
  * @package     PurpleProdigy\Accommodation
  * @since       1.0.0
  * @author      Purple Prodigy
  * @link        https://purpleprodigy.com
- * @licence     GNU General Public License 2.0+
+ * @licence     GPL-2.0+
  */
 
 namespace PurpleProdigy\Accommodation;
+
+use PurpleProdigy\Polestar\Custom;
+
+/**
+ * Register the plugin with the Polestar's Custom Module.
+ *
+ * @since 1.0.0
+ *
+ * @param string $root_file Plugin's root bootstrap file.
+ *
+ * @return void
+ */
+function register_with_custom_module( $root_file ) {
+	Custom\register_plugin( $root_file );
+}
 
 add_filter( 'add_custom_post_type_runtime_config', __NAMESPACE__ . '\register_accommodation_custom_configs' );
 add_filter( 'add_custom_taxonomy_runtime_config', __NAMESPACE__ . '\register_accommodation_custom_configs' );
@@ -23,7 +38,7 @@ add_filter( 'add_custom_taxonomy_runtime_config', __NAMESPACE__ . '\register_acc
  * @return void
  */
 function register_accommodation_custom_configs( array $configurations ) {
-	$doing_post_type = current_filter() == 'add_custom_post_type_runtime_config';
+	$doing_post_type = current_filter() === 'add_custom_post_type_runtime_config';
 
 	$filename       = $doing_post_type
 		? 'post-type'

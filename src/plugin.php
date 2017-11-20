@@ -3,13 +3,55 @@
  * Plugin Handler
  *
  * @package     PurpleProdigy\Accommodation;
- * @since       1.3.0
+ * @since       1.0.0
  * @author      Purple Prodigy
  * @link        https://purpleprodigy.com
- * @licence     GNU General Public License 2.0+
+ * @licence     GPL-2.0+
  */
 
 namespace PurpleProdigy\Accommodation;
+
+use PurpleProdigy\Metadata;
+
+/**
+ * Launches the plugin.
+ *
+ * @since 1.0.0
+ *
+ * @param string $root_file Plugin's root bootstrap file.
+ *
+ * @return void
+ */
+function launch_plugin( $root_file ) {
+	autoload();
+
+	register_with_custom_module( $root_file );
+
+	// Load configurations
+	MetaData\autoload_configurations(
+		array(
+			ACCOMMODATION_DIR . 'config/meta-box.php',
+		)
+	);
+}
+
+/**
+ * Autoload plugin files.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function autoload() {
+	$files = array(
+		'custom.php',
+		'template/helpers.php',
+	);
+
+	foreach ( $files as $file ) {
+		require __DIR__ . '/' . $file;
+	}
+}
 
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
 /**
@@ -20,7 +62,6 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
  * @return void
  */
 function enqueue_assets() {
-
 	$asset_file = 'assets/css/style.css';
 
 	wp_enqueue_style(
@@ -38,24 +79,3 @@ function enqueue_assets() {
 		array(),
 		null );
 }
-
-/**
- * Autoload plugin files.
- *
- * @since 1.2.0
- *
- * @return void
- */
-function autoload() {
-	$files = array(
-		'module.php',
-		'template/helpers.php'
-
-	);
-
-	foreach ( $files as $file ) {
-		include __DIR__ . '/' . $file;
-	}
-}
-
-autoload();

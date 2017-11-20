@@ -1,13 +1,13 @@
 <?php
+
 /**
- * Accommodation plugin
+ * The bootstrap to launch the Accommodation plugin.
  *
- * @package     PurpleProdigy\Accommodation;
- * @author      Purple Prodigy
- * @licence     GPL-2.0+
- * @link        https://purpleprodigy.com
- */
-/*
+ * @package         PurpleProdigy\Accommodation
+ * @author          Purple Prodigy
+ * @license         GPL-2.0+
+ * @link            https://purpleprodigy.com
+ *
  * @wordpress-plugin
  * Plugin Name:     Accommodation
  * Plugin URI:      https://github.com/purpleprodigy/Accommodation
@@ -17,8 +17,9 @@
  * Author URI:      https://purpleprodigy.com
  * Text Domain:     accommodation
  * Requires WP:     4.7
- * Requires PHP:    5.5
+ * Requires PHP:    5.6
  */
+
 /*
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -34,9 +35,6 @@
 */
 
 namespace PurpleProdigy\Accommodation;
-
-use PurpleProdigy\Polestar\Custom as CustomModule;
-use PurpleProdigy\Metadata as metaData;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( "Nothing to see here." );
@@ -60,8 +58,6 @@ function init_constants() {
 	define( 'ACCOMMODATION_PLUGIN', __FILE__ );
 	define( 'ACCOMMODATION_TEXT_DOMAIN', 'accommodation' );
 }
-
-include __DIR__ . '/src/plugin.php';
 
 /**
  * Register a plugin with the Custom Module.
@@ -89,26 +85,7 @@ function delete_rewrite_rules_on_plugin_status_change() {
 	delete_option( 'rewrite_rules' );
 }
 
-CustomModule\register_plugin( __FILE__ );
-
-/**
- * Autoload the plugin's files.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function autoload_files() {
-	$files = array(
-		'/src/config-store/module.php',
-		'/src/metadata/module.php'
-	);
-
-	foreach ( $files as $filename ) {
-		require __DIR__ . $filename;
-	}
-}
-
+add_action( 'polestar_is_loaded', __NAMESPACE__ . '\launch' );
 /**
  * Launch the plugin
  *
@@ -119,14 +96,7 @@ function autoload_files() {
 function launch() {
 	init_constants();
 
-	autoload_files();
+	require __DIR__ . '/src/plugin.php';
 
-	// Load configurations
-	metaData\autoload_configurations(
-		array(
-			__DIR__ . '/config/meta-box.php'
-		)
-	);
+	launch_plugin( __FILE__ );
 }
-
-launch();

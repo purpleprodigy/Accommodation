@@ -6,7 +6,7 @@
  * @since       1.0.0
  * @author      Purple Prodigy
  * @link        https://purpleprodigy.com
- * @licence     GNU General Public License 2.0+
+ * @licence     GNU-2.0+
  */
 
 namespace PurpleProdigy\Accommodation\Template;
@@ -26,7 +26,7 @@ add_action( 'genesis_loop', __NAMESPACE__ . '\do_accommodation_archive_loop' );
 function do_accommodation_archive_loop() {
 	$records = get_posts_grouped_by_term( 'accommodation', 'accommodation-type' );
 	if ( ! $records ) {
-		echo '<p>Sorry, there is no Accommodation to display.</p>';
+		_e( '<p>Sorry, there are no Accommodations to display.</p>', 'accommodation' );
 
 		return;
 	}
@@ -52,9 +52,7 @@ function do_accommodation_archive_loop() {
  * @return void
  */
 function loop_and_render_accommodations( array $accommodations ) {
-
 	foreach ( $accommodations as $accommodation ) {
-
 		$post_id                 = $accommodation['post_id'];
 		$post_title              = $accommodation['post_title'];
 		$post_content            = $accommodation['post_content'];
