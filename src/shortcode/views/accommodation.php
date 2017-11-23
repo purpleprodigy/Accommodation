@@ -1,7 +1,8 @@
 <?php
-use PurpleProdigy\PoleStar\MetaData;
+$post_id = get_the_ID();
+$booking_system_url = get_post_meta($post_id, 'booking_system_url', true );
+d( $post_id );
 ?>
-
 <div class="accommodation" itemscope itemtype="http://schema.org/Accommodation">
     <div class="thumbnail one-fourth" itemprop="photo">
         <img class="alignnone" src="<?php esc_url( $post_thumbnail_url ) ?>"
@@ -12,7 +13,7 @@ use PurpleProdigy\PoleStar\MetaData;
         <p itemprop="description">
 <?php esc_html_e( $post_content ); ?>
             <br>
-            <a class="button" href="<?php echo esc_url( get_post_meta( $custom_fields['booking_system_url'] ) ); ?>">BOOK NOW</a>
+            <a class="button" href="<?php echo esc_url( get_post_meta( $post_id, 'booking_system_url', true ) ); ?>">BOOK NOW</a>
         </p>
     </div>
     <ul class="summary" itemprop="amenityFeature">

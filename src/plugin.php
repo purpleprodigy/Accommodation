@@ -11,7 +11,7 @@
 
 namespace PurpleProdigy\Accommodation;
 
-use PurpleProdigy\Metadata;
+use PurpleProdigy\Polestar\Metadata;
 
 /**
  * Launches the plugin.

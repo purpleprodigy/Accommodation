@@ -11,6 +11,13 @@
 
 namespace PurpleProdigy\Accommodation;
 
+//use PurpleProdigy\Polestar\Metadata;
+//use PurpleProdigy\Polestar\ConfigStore;
+//
+//$store_key = array_pop(Metadata\get_meta_box_keys());
+//$config_file = ConfigStore\getConfig( 'meta_box_' . $store_key );
+//$custom_fields = Metadata\get_custom_fields_values( get_the_ID(), $store_key, $config_file );
+
 return array(
 
 	/**=================================================
