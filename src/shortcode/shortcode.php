@@ -41,7 +41,7 @@ function process_the_accommodation_shortcode( array $config, array $attributes, 
 	if ( $attributes['post_id'] > 0 ) {
 		render_single_accommodation( $attributes, $config );
 	} else {
-		render_archive_accommodation( $attributes, $config );
+		render_type_accommodation( $attributes, $config );
 	}
 
 	return ob_get_clean();
@@ -58,26 +58,26 @@ function process_the_accommodation_shortcode( array $config, array $attributes, 
  * @return void
  */
 function render_single_accommodation( array $attributes, array $config ) {
-	$accommodation = get_post( $attributes['post_id'] );
+	$accommodation_id = (int) $attributes['post_id'];
+	$accommodation    = get_post( $accommodation_id );
 	if ( ! $accommodation ) {
 		return render_none_found_message( $attributes );
 	}
 
-	$use_term_container = false;
-	$is_calling_source  = 'shortcode-single-accommodation';
-	$post_id            =   $accommodation->post_id;
-	$post_title         = $accommodation->post_title;
-	$post_content       = $accommodation->post_content;
-	$post_thumbnail_id  = $accommodation->thumbnail_id;
-	$post_thumbnail_url  = $accommodation->thumbnail_url;
-	$post_thumbnail_title  = $accommodation->post_title;
-
+	$use_term_container   = false;
+	$is_calling_source    = 'shortcode-single-accommodation';
+	$post_id              = $accommodation->post_id;
+	$post_title           = $accommodation->post_title;
+	$post_content         = $accommodation->post_content;
+	$post_thumbnail_id    = $accommodation->thumbnail_id;
+	$post_thumbnail_url   = $accommodation->thumbnail_url;
+	$post_thumbnail_title = $accommodation->post_title;
 
 	include $config['view']['container_single'];
 }
 
 /**
- * Render the Archive Accommodation.
+ * Render the Type Accommodations.
  *
  * @since 1.3.0
  *
@@ -86,7 +86,7 @@ function render_single_accommodation( array $attributes, array $config ) {
  *
  * @return void
  */
-function render_archive_accommodation( array $attributes, array $config ) {
+function render_type_accommodation( array $attributes, array $config ) {
 	$config_args = array(
 		'posts_per_page' => (int) $attributes['number_of_accommodations'],
 		'nopaging'       => true,
@@ -111,7 +111,7 @@ function render_archive_accommodation( array $attributes, array $config ) {
 	$is_calling_source  = 'shortcode-by-type';
 	$term_slug          = $attributes['type'];
 
-	include $config['view']['container_type'];
+	include $config['view']['container'];
 
 	wp_reset_postdata();
 }
@@ -128,11 +128,16 @@ function render_archive_accommodation( array $attributes, array $config ) {
  * @return void
  */
 function loop_and_render_accommodations_by_type( \WP_Query $query, array $attributes, array $config ) {
+	$accommodation_id = (int) $attributes['post_id'];
+	$accommodation    = get_post( $accommodation_id );
 	while ( $query->have_posts() ) {
 		$query->the_post();
 
-		$post_title     = get_the_title();
-		$hidden_content = do_shortcode( get_the_content() );
+		$post_title           = $accommodation->post_title;
+		$post_content         = $accommodation->post_content;
+		$post_thumbnail_id    = $accommodation->thumbnail_id;
+		$post_thumbnail_url   = $accommodation->thumbnail_url;
+		$post_thumbnail_title = $accommodation->post_title;
 
 		include $config['view']['accommodation'];
 	}
