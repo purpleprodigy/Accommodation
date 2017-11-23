@@ -1,6 +1,6 @@
 <?php
 /**
- * Runtime configuration for the Accommodation Display custom post type.
+ * Runtime configuration for the Accommodation custom post type.
  *
  * @package     PurpleProdigy\Accommodation
  * @since       1.0.0
@@ -41,6 +41,9 @@ return array(
 			'genesis-seo',
 			'genesis-layouts',
 			'genesis-scripts'
+		),
+		'additional'     => array(
+			'',
 		),
 	),
 

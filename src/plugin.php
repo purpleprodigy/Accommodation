@@ -45,6 +45,7 @@ function launch_plugin( $root_file ) {
 function autoload() {
 	$files = array(
 		'custom.php',
+		'shortcode/shortcode.php',
 		'template/helpers.php',
 	);
 

@@ -13,7 +13,7 @@
 <p>
     <label for="sleeps"><?php _e( 'Sleeps', 'metabox' ); ?></label>
     <input class="large-text" type="text" name="<?php echo $meta_box_id; ?>[sleeps]" value="<?php esc_attr_e( $custom_fields['sleeps'] ); ?>">
-    <span class="description"><?php _e( 'Enter the how many it sleeps.', 'metabox' ); ?></span>
+    <span class="description"><?php _e( 'Enter how many it sleeps.', 'metabox' ); ?></span>
 </p>
 <p>
     <label for="booking_system_url"><?php _e( 'URL', 'metabox' ); ?></label>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Registration and Handlers for the Accommodation's custom post type and taxonomy.
+ * Registration and Handlers for the Accommodation's custom post type, taxonomy and shortcode.
  *
  * @package     PurpleProdigy\Accommodation
  * @since       1.0.0

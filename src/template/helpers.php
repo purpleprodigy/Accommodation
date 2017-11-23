@@ -13,7 +13,7 @@ namespace PurpleProdigy\Accommodation\Template;
 
 add_filter( 'archive_template', __NAMESPACE__ . '\load_the_accommodation_archive_template' );
 /**
- * Load the Accommodation template archive template from our plugin.
+ * Load the Accommodation archive template from our plugin.
  *
  * @since 1.0.0
  *

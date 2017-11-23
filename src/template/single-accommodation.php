@@ -1,6 +1,6 @@
 <?php
 /**
- * Accommodation Archive Template
+ * Single Accommodation Template
  *
  * @package     PurpleProdigy\Accommodation\Template
  * @since       1.0.0
@@ -12,9 +12,9 @@
 namespace PurpleProdigy\Accommodation\Template;
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-add_action( 'genesis_loop', __NAMESPACE__ . '\do_accommodation_archive_loop' );
+add_action( 'genesis_loop', __NAMESPACE__ . '\do_single_accommodation_loop' );
 /**
- * Do the Accommodation Archive loop and render out the HTML.
+ * Do the Single Accommodation loop and render out the HTML.
  *
  * NOTE: The variables are set to call the right HTML
  * markup in the container.php view file.
@@ -23,7 +23,7 @@ add_action( 'genesis_loop', __NAMESPACE__ . '\do_accommodation_archive_loop' );
  *
  * @return void
  */
-function do_accommodation_archive_loop() {
+function do_single_accommodation_loop() {
 	$records = get_posts_grouped_by_term( 'accommodation', 'accommodation-type' );
 	if ( ! $records ) {
 		_e( '<p>Sorry, there are no Accommodations to display.</p>', 'accommodation' );
@@ -38,7 +38,7 @@ function do_accommodation_archive_loop() {
 	foreach ( $records as $record ) {
 		$term_slug = $record['term_slug'];
 
-		include ACCOMMODATION_DIR . 'src/views/container.php';
+		include ACCOMMODATION_DIR . 'src/views/accommodation.php';
 	}
 }
 
@@ -52,7 +52,6 @@ function do_accommodation_archive_loop() {
  * @return void
  */
 function loop_and_render_accommodations( array $accommodations ) {
-
 	foreach ( $accommodations as $accommodation ) {
 		$post_id                 = $accommodation['post_id'];
 		$post_title              = $accommodation['post_title'];
