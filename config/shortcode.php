@@ -36,9 +36,8 @@ return array(
 	 * Paths to the view files
 	 *==================================================*/
 	'view'                        => array(
-		'container_single' => ACCOMMODATION_DIR . '/src/shortcode/views/container.php',
+		'container_single' => ACCOMMODATION_DIR . '/src/shortcode/views/accommodation.php',
 		'container_type'   => ACCOMMODATION_DIR . '/src/shortcode/views/container.php',
-		'accommodation'    => ACCOMMODATION_DIR . '/src/shortcode/views/accommodation.php',
 	),
 
 	/**=================================================
@@ -46,11 +45,9 @@ return array(
 	 * overridable by the author.
 	 *==================================================*/
 	'defaults'                    => array(
-		'show_icon'                => '',
-		'hide_icon'                => '',
 		'post_id'                  => 0,
 		'type'                     => '',
-		'number_of_accommodations' => - 1,
+		'number_of_accommodations' => -1,
 		'show_none_found_message'  => 1,
 		'none_found_by_type'       => __( 'Sorry, no Accommodations were found for that type.', ACCOMMODATION_TEXT_DOMAIN ),
 		'none_found_single'        => __( 'Sorry, no Accommodation found.', ACCOMMODATION_TEXT_DOMAIN ),

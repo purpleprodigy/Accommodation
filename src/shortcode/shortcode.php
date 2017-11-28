@@ -22,12 +22,11 @@ Custom\register_shortcode( ACCOMMODATION_DIR . 'config/shortcode.php' );
  *
  * @param array $config Array of runtime configuration parameters.
  * @param array $attributes Attributes for this shortcode instance.
- * @param string|null $content Content between the opening and closing shortcode elements.
  * @param string $shortcode_name Name of the shortcode.
  *
  * @return string
  */
-function process_the_accommodation_shortcode( array $config, array $attributes, $content, $shortcode_name ) {
+function process_the_accommodation_shortcode( array $config, array $attributes, $shortcode_name ) {
 
 	$attributes['post_id'] = (int) $attributes['post_id'];
 
@@ -88,12 +87,12 @@ function render_single_accommodation( array $attributes, array $config ) {
  */
 function render_type_accommodation( array $attributes, array $config ) {
 	$config_args = array(
-		'posts_per_page' => (int) $attributes['number_of_accommodations'],
+	//	'posts_per_page' => (int) $attributes['number_of_accommodations'],
 		'nopaging'       => true,
 		'post_type'      => 'accommodation',
 		'tax_query'      => array(
 			array(
-				'taxonomy' => 'type',
+				'taxonomy' => 'accommodation-type',
 				'field'    => 'slug',
 				'terms'    => $attributes['type'],
 			),
@@ -111,7 +110,7 @@ function render_type_accommodation( array $attributes, array $config ) {
 	$is_calling_source  = 'shortcode-by-type';
 	$term_slug          = $attributes['type'];
 
-	include $config['view']['container'];
+	include $config['view']['container_type'];
 
 	wp_reset_postdata();
 }
@@ -128,6 +127,7 @@ function render_type_accommodation( array $attributes, array $config ) {
  * @return void
  */
 function loop_and_render_accommodations_by_type( \WP_Query $query, array $attributes, array $config ) {
+	d( 'loading loop_and_render_accommodations_by_type function' );
 	$accommodation_id = (int) $attributes['post_id'];
 	$accommodation    = get_post( $accommodation_id );
 	while ( $query->have_posts() ) {
@@ -139,7 +139,7 @@ function loop_and_render_accommodations_by_type( \WP_Query $query, array $attrib
 		$post_thumbnail_url   = $accommodation->thumbnail_url;
 		$post_thumbnail_title = $accommodation->post_title;
 
-		include $config['view']['accommodation'];
+		include $config['view']['container_type'];
 	}
 }
 
