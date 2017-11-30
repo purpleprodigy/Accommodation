@@ -39,6 +39,89 @@ function load_the_accommodation_archive_template( $theme_archive_template ) {
 	return $theme_archive_template;
 }
 
+add_filter( 'template_include', __NAMESPACE__ . '\include_accommodation_templates' );
+/**
+ * Pass back the template file to the front-end loader
+ *
+ * @since 1.0.0
+ *
+ * @param string $template
+ *
+ * @return string
+ */
+function include_accommodation_templates($template) {
+	if ( str_ends_with( $template, 'index.php' ) ) {
+		return $template;
+	}
+
+	global $post;
+
+	if ( is_null( $post ) ) {
+		return $template;
+	}
+
+	if (!is_single()) {
+		return $template;
+	}
+
+	return get_template( $template);
+}
+
+/**
+ * Get the {context}-template file
+ *
+ * @since 1.0.0
+ *
+ * @param string $template_fullpath
+ *
+ * @return string
+ */
+function get_template( $template_fullpath ) {
+	$template = extract_template_slug_from_fullpath( $template_fullpath ) . '-accommodation.php';
+
+	$theme_file = locate_template( array( $template ) );
+
+	if ( $theme_file && is_readable( $theme_file ) ) {
+		return $theme_file;
+	}
+
+	if ( is_readable( ACCOMMODATION_DIR . 'src/views/' . $template ) ) {
+		return ACCOMMODATION_DIR . 'src/views/' . $template;
+	}
+
+	return $template_fullpath;
+}
+
+/**
+ * Build the templates full path and filename
+ *
+ * @since 1.0.0
+ *
+ * @param string $template_slug
+ *
+ * @return string
+ */
+function build_template_file_path_and_name( $template_slug ) {
+
+	return $template_slug . '-accommodation.php';
+}
+
+/**
+ * Extract template's slug from the fullpath
+ *
+ * @since 1.0.0
+ *
+ * @param string $template_fullpath
+ *
+ * @return string
+ */
+function extract_template_slug_from_fullpath( $template_fullpath ) {
+	$parts    = explode( '/', $template_fullpath );
+	$template = array_pop( $parts );
+
+	return rtrim( $template, '.php' );
+}
+
 /**
  * Gets all of the posts grouped by terms for the specified
  * post type and taxonomy.

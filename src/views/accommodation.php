@@ -7,15 +7,7 @@
         <h3 itemprop="name"><?php esc_html_e( $post_title ); ?></h3>
         <p itemprop="description">
 			<?php esc_html_e( $post_content ); ?>
-            <br>
-            <a class="button"
-               href="<?php echo esc_url( get_post_meta( $post_id, 'booking_system_url', true ) ); ?>">BOOK
-                NOW</a>
         </p>
     </div>
-    <ul class="summary" itemprop="amenityFeature">
-        <li><i class="fa fa-male"></i><?php esc_html_e( get_post_meta( $post_id, 'sleeps', true ) ); ?></li>
-        <li><i class="fa fa-bed"></i><?php esc_html_e( get_post_meta( $post_id, 'beds', true ) ); ?></li>
-        <li><i class="fa fa-usd"></i><?php esc_html_e( get_post_meta( $post_id, 'price', true ) ); ?></li>
-    </ul>
+    <?php require __DIR__ . '/summary.php'; ?>
 </div>
