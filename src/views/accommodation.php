@@ -5,9 +5,8 @@
     </div>
     <div class="description two-fourths">
         <h3 itemprop="name"><?php esc_html_e( $post_title ); ?></h3>
-        <p itemprop="description">
+        <p class="accommodation-description" itemprop="description">
 			<?php esc_html_e( $post_content ); ?>
-        </p>
-    </div>
+        <br>
     <?php require __DIR__ . '/summary.php'; ?>
 </div>

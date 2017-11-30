@@ -132,7 +132,6 @@ function render_type_accommodation( array $attributes, array $config ) {
  * @return void
  */
 function loop_and_render_accommodations_by_type( \WP_Query $query, array $attributes, array $config ) {
-	d( 'loading loop_and_render_accommodations_by_type function' );
 	$accommodation_id = (int) $attributes['post_id'];
 	$accommodation    = get_post( $accommodation_id );
 	while ( $query->have_posts() ) {

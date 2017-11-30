@@ -9,7 +9,7 @@ if ( isset ( $use_term_container ) && $use_term_container ) : ?>
 	<?php endif; ?>
 
 	<?php if ( isset( $show_term_name ) && $show_term_name ) : ?>
-        <h2><?php esc_html_e( $term_slug ); ?></h2>
+        <h2><?php esc_html_e( ucfirst($term_slug) ); ?></h2>
 	<?php endif; ?>
     <div class="accommodation--section">
 		<?php
