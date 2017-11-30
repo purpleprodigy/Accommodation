@@ -36,8 +36,8 @@ return array(
 	 * Paths to the view files
 	 *==================================================*/
 	'view'                        => array(
-		'container_single' => ACCOMMODATION_DIR . '/src/shortcode/views/accommodation.php',
-		'container_type'   => ACCOMMODATION_DIR . '/src/shortcode/views/container.php',
+		'container_single' => ACCOMMODATION_DIR . '/src/views/shortcode-accommodation.php',
+		'container_type'   => ACCOMMODATION_DIR . '/src/views/container.php',
 	),
 
 	/**=================================================

@@ -87,7 +87,7 @@ function render_single_accommodation( array $attributes, array $config ) {
  */
 function render_type_accommodation( array $attributes, array $config ) {
 	$config_args = array(
-	//	'posts_per_page' => (int) $attributes['number_of_accommodations'],
+		'posts_per_page' => (int) $attributes['number_of_accommodations'],
 		'nopaging'       => true,
 		'post_type'      => 'accommodation',
 		'tax_query'      => array(
@@ -102,8 +102,13 @@ function render_type_accommodation( array $attributes, array $config ) {
 	);
 
 	$query = new \WP_Query( $config_args );
+
 	if ( ! $query->have_posts() ) {
 		return render_none_found_message( $attributes, false );
+	}
+
+	while ( $query->have_posts() ) {
+		$query->the_post();
 	}
 
 	$use_term_container = true;
@@ -133,13 +138,14 @@ function loop_and_render_accommodations_by_type( \WP_Query $query, array $attrib
 	while ( $query->have_posts() ) {
 		$query->the_post();
 
+		$is_calling_source    = 'loop-and-render';
 		$post_title           = $accommodation->post_title;
 		$post_content         = $accommodation->post_content;
 		$post_thumbnail_id    = $accommodation->thumbnail_id;
 		$post_thumbnail_url   = $accommodation->thumbnail_url;
 		$post_thumbnail_title = $accommodation->post_title;
 
-		include $config['view']['container_type'];
+		include $config['view']['container_single'];
 	}
 }
 

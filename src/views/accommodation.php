@@ -8,7 +8,9 @@
         <p itemprop="description">
 			<?php esc_html_e( $post_content ); ?>
             <br>
-		    <a class="button" href="<?php echo esc_url( get_post_meta( $post_id, 'booking_system_url', true ) ); ?>">BOOK NOW</a>
+            <a class="button"
+               href="<?php echo esc_url( get_post_meta( $post_id, 'booking_system_url', true ) ); ?>">BOOK
+                NOW</a>
         </p>
     </div>
     <ul class="summary" itemprop="amenityFeature">
