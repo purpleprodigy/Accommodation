@@ -4,10 +4,6 @@ phpunit.xml
 /bin
 tests/mocks/env/
 
-
-# Sass cache
-.sass-cache/
-
 # Development files
 /node_modules
 /assets/vendor/
