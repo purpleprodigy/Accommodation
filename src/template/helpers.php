@@ -11,6 +11,8 @@
 
 namespace PurpleProdigy\Accommodation\Template;
 
+use PurpleProdigy\Polestar;
+
 add_filter( 'archive_template', __NAMESPACE__ . '\load_the_accommodation_archive_template' );
 /**
  * Load the Accommodation archive template from our plugin.
@@ -50,7 +52,7 @@ add_filter( 'template_include', __NAMESPACE__ . '\include_accommodation_template
  * @return string
  */
 function include_accommodation_templates($template) {
-	if ( str_ends_with( $template, 'index.php' ) ) {
+	if ( Polestar\str_ends_with( $template, 'index.php' ) ) {
 		return $template;
 	}
 
