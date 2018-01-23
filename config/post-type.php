@@ -5,7 +5,7 @@
  * @package     PurpleProdigy\Accommodation
  * @since       1.0.0
  * @author      Purple Prodigy
- * @link        https:/purpleprodigy.com
+ * @link        https://purpleprodigy.com
  * @licence     GNU-2.0+
  */
 
