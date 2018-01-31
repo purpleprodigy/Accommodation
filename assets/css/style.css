@@ -15,6 +15,10 @@
     clear: both;
 }
 
+.accommodation-container h2 {
+   clear: both;
+}
+
 .accommodation .description {
     padding-right: 10px;
 }
