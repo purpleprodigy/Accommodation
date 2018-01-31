@@ -11,36 +11,6 @@
 
 namespace PurpleProdigy\Accommodation\Template;
 
-use PurpleProdigy\Polestar;
-
-add_filter( 'archive_template', __NAMESPACE__ . '\load_the_accommodation_archive_template' );
-/**
- * Load the Accommodation archive template from our plugin.
- *
- * @since 1.0.0
- *
- * @param string $theme_archive_template Fully qualified path to the archive template.
- *
- * @return string
- */
-function load_the_accommodation_archive_template( $theme_archive_template ) {
-	if ( ! is_post_type_archive( 'accommodation' ) ) {
-		return $theme_archive_template;
-	}
-
-	$plugin_archive_template = __DIR__ . '/archive-accommodation.php';
-
-	if ( ! $theme_archive_template ) {
-		return $plugin_archive_template;
-	}
-
-	if ( strpos( $theme_archive_template, '/archive-accommodation.php' ) === false ) {
-		return $plugin_archive_template;
-	}
-
-	return $theme_archive_template;
-}
-
 add_filter( 'template_include', __NAMESPACE__ . '\include_accommodation_templates' );
 /**
  * Pass back the template file to the front-end loader
@@ -51,47 +21,62 @@ add_filter( 'template_include', __NAMESPACE__ . '\include_accommodation_template
  *
  * @return string
  */
-function include_accommodation_templates($template) {
-	if ( Polestar\str_ends_with( $template, 'index.php' ) ) {
+function include_accommodation_templates( $template ) {
+
+	if ( is_page() ) {
 		return $template;
 	}
 
-	global $post;
+	if ( is_single() ) {
+		global $post;
+		if ( ! is_object( $post ) ) {
+			return $template;
+		}
 
-	if ( is_null( $post ) ) {
+		if ( 'accommodation' === get_post_type( $post->ID ) ) {
+			return get_template( $template, 'single-accommodation' );
+		}
+
 		return $template;
 	}
 
-	if (!is_single()) {
-		return $template;
+	if ( is_post_type_archive( 'accommodation' ) ) {
+		return get_template( $template, 'archive-accommodation' );
 	}
 
-	return get_template( $template);
+	if ( is_tax( 'accommodation-type' ) ) {
+		return get_template( $template, 'taxonomy-accommodation-type' );
+	}
+
+	return $template;
 }
 
 /**
- * Get the {context}-template file
+ * Get the template file from the theme or plugin.
  *
  * @since 1.0.0
  *
- * @param string $template_fullpath
+ * @param string $original The original template.
+ * @param string $template_name     The name of the template.
  *
  * @return string
  */
-function get_template( $template_fullpath ) {
-	$template = extract_template_slug_from_fullpath( $template_fullpath ) . '-accommodation.php';
+function get_template( $original, $template_name ) {
+	$template_name .= '.php';
 
-	$theme_file = locate_template( array( $template ) );
-
+	// Let the theme override the plugin.
+	$theme_file = locate_template( array( $template_name ) );
 	if ( $theme_file && is_readable( $theme_file ) ) {
 		return $theme_file;
 	}
 
-	if ( is_readable( ACCOMMODATION_DIR . 'src/views/' . $template ) ) {
-		return ACCOMMODATION_DIR . 'src/views/' . $template;
+	// If the plugin has the template, return it.
+	$template_file = __DIR__ . '/' . $template_name;
+	if ( is_readable( $template_file ) ) {
+		return $template_file;
 	}
 
-	return $template_fullpath;
+	return $original;
 }
 
 /**
@@ -133,7 +118,7 @@ function extract_template_slug_from_fullpath( $template_fullpath ) {
  * @since 1.0.0
  *
  * @param string $post_type_name Post type to limit query to
- * @param string $taxonomy_name Taxonomy to limit query to
+ * @param string $taxonomy_name  Taxonomy to limit query to
  *
  * @return array|false
  */
@@ -177,7 +162,7 @@ function get_posts_grouped_by_term( $post_type_name, $taxonomy_name ) {
  * @since 1.0.0
  *
  * @param string $post_type_name Post type to limit query to
- * @param string $taxonomy_name Taxonomy to limit query to
+ * @param string $taxonomy_name  Taxonomy to limit query to
  *
  * @return array|false
  */
@@ -208,11 +193,44 @@ function get_posts_grouped_by_term_from_db( $post_type_name, $taxonomy_name ) {
 		ORDER BY t.term_id, p.menu_order ASC";
 
 	$sql_query = $wpdb->prepare( $sql_query, $post_type_name, $taxonomy_name );
-	$results = $wpdb->get_results( $sql_query );
+	$results   = $wpdb->get_results( $sql_query );
 
 	if ( ! $results || ! is_array( $results ) ) {
 		return array();
 	}
 
 	return $results;
+}
+
+/**
+ * Render the accommodation's image.
+ *
+ * @since 1.0.0
+ *
+ * @param null|int $accommodation_id Optional. The given accommodation's ID. Default is null.
+ *
+ * @return void
+ */
+function render_accommodation_image( $accommodation_id = null ) {
+	$img = genesis_get_image( array(
+		'post_id' => $accommodation_id,
+		'format'  => 'html',
+		'size'    => genesis_get_option( 'image_size' ),
+		'context' => 'archive',
+		'attr'    => array(
+			'class'    => 'alignnone post-image entry-image',
+			'alt'      => get_the_title( $accommodation_id ),
+			'itemprop' => 'image',
+		),
+	) );
+	if ( empty( $img ) ) {
+		return;
+	}
+
+	genesis_markup( array(
+		'open'    => '<a %s>',
+		'close'   => '</a>',
+		'content' => wp_make_content_images_responsive( $img ),
+		'context' => 'entry-image-link',
+	) );
 }

@@ -20,8 +20,8 @@ Custom\register_shortcode( ACCOMMODATION_DIR . 'config/shortcode.php' );
  *
  * @since 1.0.0
  *
- * @param array $config Array of runtime configuration parameters.
- * @param array $attributes Attributes for this shortcode instance.
+ * @param array  $config         Array of runtime configuration parameters.
+ * @param array  $attributes     Attributes for this shortcode instance.
  * @param string $shortcode_name Name of the shortcode.
  *
  * @return string
@@ -63,14 +63,9 @@ function render_single_accommodation( array $attributes, array $config ) {
 		return render_none_found_message( $attributes );
 	}
 
-	$use_term_container   = false;
-	$is_calling_source    = 'shortcode-single-accommodation';
-	$post_id              = $accommodation->post_id;
-	$post_title           = $accommodation->post_title;
-	$post_content         = $accommodation->post_content;
-	$post_thumbnail_id    = $accommodation->thumbnail_id;
-	$post_thumbnail_url   = $accommodation->thumbnail_url;
-	$post_thumbnail_title = $accommodation->post_title;
+	$is_calling_source  = 'shortcode-single-accommodation';
+	$accommodation_name = $accommodation->post_title;
+	$description        = $accommodation->post_content;
 
 	include $config['view']['container_single'];
 }
@@ -107,12 +102,9 @@ function render_type_accommodation( array $attributes, array $config ) {
 		return render_none_found_message( $attributes, false );
 	}
 
-	while ( $query->have_posts() ) {
-		$query->the_post();
-	}
-
 	$use_term_container = true;
 	$is_calling_source  = 'shortcode-by-type';
+	$show_term_name     = true;
 	$term_slug          = $attributes['type'];
 
 	include $config['view']['container_type'];
@@ -126,23 +118,19 @@ function render_type_accommodation( array $attributes, array $config ) {
  * @since 1.3.0
  *
  * @param \WP_Query $query
- * @param array $attributes
- * @param array $config
+ * @param array     $attributes
+ * @param array     $config
  *
  * @return void
  */
 function loop_and_render_accommodations_by_type( \WP_Query $query, array $attributes, array $config ) {
-	$accommodation_id = (int) $attributes['post_id'];
-	$accommodation    = get_post( $accommodation_id );
 	while ( $query->have_posts() ) {
 		$query->the_post();
 
-		$is_calling_source    = 'loop-and-render';
-		$post_title           = $accommodation->post_title;
-		$post_content         = $accommodation->post_content;
-		$post_thumbnail_id    = $accommodation->thumbnail_id;
-		$post_thumbnail_url   = $accommodation->thumbnail_url;
-		$post_thumbnail_title = $accommodation->post_title;
+		$is_calling_source  = 'loop-and-render';
+		$accommodation_id   = (int) get_the_ID();
+		$accommodation_name = get_the_title();
+		$description        = get_the_content();
 
 		include $config['view']['container_single'];
 	}
@@ -154,7 +142,7 @@ function loop_and_render_accommodations_by_type( \WP_Query $query, array $attrib
  * @since 1.0.0
  *
  * @param array $attributes
- * @param bool $is_single_accommodation
+ * @param bool  $is_single_accommodation
  *
  * @return void
  */

@@ -1,12 +1,16 @@
+<?php
+
+namespace PurpleProdigy\Accommodation;
+
+?>
 <div class="accommodation" itemscope itemtype="http://schema.org/Accommodation">
     <div class="thumbnail one-fourth" itemprop="photo">
-        <img class="alignnone" src="<?php esc_html_e( $post_thumbnail_url ) ?>"
-             alt="<?php esc_html_e( $post_thumbnail_title ); ?>" width="250" height="140"/>
+		<?php Template\render_accommodation_image( $accommodation_id ); ?>
     </div>
     <div class="description two-fourths">
-        <h3 itemprop="name"><?php esc_html_e( $post_title ); ?></h3>
-        <p class="accommodation-description" itemprop="description">
-			<?php esc_html_e( $post_content ); ?>
-        <br>
-    <?php require __DIR__ . '/summary.php'; ?>
-</div>
+        <h3 itemprop="name"><?php esc_html_e( $accommodation_name ); ?></h3>
+        <p itemprop="description">
+			<?php esc_html_e( $description ); ?>
+        </p>
+		<?php require __DIR__ . '/summary.php'; ?>
+</div><!-- //.accommodation -->

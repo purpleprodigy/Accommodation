@@ -53,13 +53,9 @@ function do_accommodation_archive_loop() {
  */
 function loop_and_render_accommodations( array $accommodations ) {
 	foreach ( $accommodations as $accommodation ) {
-		$post_id                 = $accommodation['post_id'];
-		$post_title              = $accommodation['post_title'];
-		$post_content            = $accommodation['post_content'];
-		$post_thumbnail_id       = $accommodation['thumbnail_id'];
-		$post_thumbnail_url      = $accommodation['thumbnail_url'];
-		$post_thumbnail_metadata = $accommodation['thumbnail_metadata'];
-		$post_thumbnail_title    = $accommodation['post_title'];
+		$accommodation_id   = $accommodation['post_id'];
+		$accommodation_name = $accommodation['post_title'];
+		$description        = $accommodation['post_content'];
 
 		include ACCOMMODATION_DIR . 'src/views/accommodation.php';
 	}
