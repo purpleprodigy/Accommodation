@@ -4,7 +4,14 @@
 </p>
 </div>
 <ul class="summary" itemprop="amenityFeature">
-    <li><i class="fa fa-male"></i><?php esc_html_e( get_post_meta( $accommodation_id, 'sleeps', true ) ); ?></li>
-    <li><i class="fa fa-bed"></i><?php esc_html_e( get_post_meta( $accommodation_id, 'beds', true ) ); ?></li>
-    <li><i class="fa fa-usd"></i><?php esc_html_e( get_post_meta( $accommodation_id, 'price', true ) ); ?></li>
+	<?php
+	if ( get_post_meta( $accommodation_id, 'sleeps', false ) ) { ?>
+        <li><i class="fa fa-male"></i><?php esc_html_e( get_post_meta( $accommodation_id, 'sleeps', true ) ); ?></li>
+	<?php }
+	if ( get_post_meta( $accommodation_id, 'beds', false ) ) { ?>
+        <li><i class="fa fa-bed"></i><?php esc_html_e( get_post_meta( $accommodation_id, 'beds', true ) ); ?></li>
+	<?php }
+	if ( get_post_meta( $accommodation_id, 'price', false ) ) { ?>
+        <li><i class="fa fa-usd"></i><?php esc_html_e( get_post_meta( $accommodation_id, 'price', true ) ); ?></li>
+	<?php } ?>
 </ul>
