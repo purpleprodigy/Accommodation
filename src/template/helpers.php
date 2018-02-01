@@ -56,8 +56,8 @@ function include_accommodation_templates( $template ) {
  *
  * @since 1.0.0
  *
- * @param string $original The original template.
- * @param string $template_name     The name of the template.
+ * @param string $original       The original template.
+ * @param string $template_name  The name of the template.
  *
  * @return string
  */

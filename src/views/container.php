@@ -1,7 +1,7 @@
 <?php
 
-use function PurpleProdigy\Accommodation\loop_and_render_accommodations_by_type;
-use function PurpleProdigy\Accommodation\Template\loop_and_render_accommodations;
+use PurpleProdigy\Accommodation;
+use PurpleProdigy\Accommodation\Template;
 
 if ( isset( $use_term_container ) && $use_term_container ) : ?>
 <div class="accommodation-container" data-type="<?php echo esc_attr( $term_slug ); ?>">
@@ -13,10 +13,10 @@ if ( isset( $use_term_container ) && $use_term_container ) : ?>
     <div class="accommodation--section">
 		<?php
 		if ( 'template' === $is_calling_source  ) {
-			loop_and_render_accommodations( $record['posts'] );
+			Template\loop_and_render_accommodations( $record['posts'] );
 		}
         elseif ( 'shortcode-by-type' === $is_calling_source ) {
-	       loop_and_render_accommodations_by_type( $query, $attributes, $config );
+	        Accommodation\loop_and_render_accommodations_by_type( $query, $attributes, $config );
 		}
 		?>
     </div>
