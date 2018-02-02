@@ -74,3 +74,9 @@
     border-radius: 25rem;
     margin-right: 0.4375rem;
 }
+
+body.single-accommodation .accommodation,
+body.tax-accommodation-type .accommodation,
+.accommodation-container {
+    padding: 40px;
+}
