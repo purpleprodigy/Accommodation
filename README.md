@@ -6,8 +6,10 @@ Accommodation is a WordPress Plugin that displays a grid layout for accommodatio
 
 This plugin includes the following features:
 
-- Displays accommodation on an archive page
-- Gulp as its task runner
+- Displays all accommodation on an archive page.
+- Displays accommodation by type in an archive template.
+- Shortcodes to display a single accommodation post or a taxonomy, eg. `[accommodation post_id="2"]` or  `[accommodation type="cabins"]`.
+- Gulp as its task runner.
 
 ## Installation
 
