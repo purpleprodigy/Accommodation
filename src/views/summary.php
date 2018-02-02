@@ -2,7 +2,10 @@
     <a class="button" href="<?php echo esc_url( get_post_meta( $accommodation_id, 'booking_system_url', true ) ); ?>">BOOK
         NOW</a>
 </p>
-</div>
+<?php
+if ( ! is_tax() ) {
+	?> </div>
+<?php } ?>
 <ul class="summary" itemprop="amenityFeature">
 	<?php
 	if ( get_post_meta( $accommodation_id, 'sleeps', false ) ) { ?>
