@@ -228,9 +228,6 @@ function render_accommodation_image( $accommodation_id = null ) {
 	}
 
 	genesis_markup( array(
-		'open'    => '<a %s>',
-		'close'   => '</a>',
 		'content' => wp_make_content_images_responsive( $img ),
-		'context' => 'entry-image-link',
 	) );
 }

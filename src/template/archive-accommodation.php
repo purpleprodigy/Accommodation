@@ -25,6 +25,7 @@ add_action( 'genesis_loop', __NAMESPACE__ . '\do_accommodation_archive_loop' );
  */
 function do_accommodation_archive_loop() {
 	$records = get_posts_grouped_by_term( 'accommodation', 'accommodation-type' );
+
 	if ( ! $records ) {
 		_e( '<p>Sorry, there are no Accommodations to display.</p>', 'accommodation' );
 
